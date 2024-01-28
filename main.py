@@ -27,8 +27,8 @@ class HelloWorld(Resource):
         return {'hello': 'world'}
 
 
-api.add_resource(HelloWorld, '/test')  # endpont testowy
-api.add_resource(PeopleCounter, '/')  # endpont main
+api.add_resource(HelloWorld, '/test')  # endpoint test
+api.add_resource(PeopleCounter, '/')  # endpoint main
 
 if __name__ == '__main__':
     app.run(debug=True)
