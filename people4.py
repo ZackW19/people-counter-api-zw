@@ -5,7 +5,8 @@ from flask import Flask, request, jsonify
 import cv2
 import numpy as np
 import requests
-from io import BytesIO  # Importuje klasę BytesIO z modułu io, która pozwala na operacje na danych binarnych w formie bufora bajtów.
+from io import BytesIO  # Importuje klasę BytesIO z modułu io,
+# która pozwala na operacje na danych binarnych w formie bufora bajtów.
 
 app = Flask(__name__)
 
@@ -23,18 +24,22 @@ def count_people(image):
     boxes, weights = hog.detectMultiScale(img, winStride=(6, 6))
 
     # Parametry detektora HOG:
-    # winStride=(6, 6): Przesunięcie okna detekcji w poziomie i pionie podczas przeszukiwania obrazu. Im mniejsza tym więcej wykrywa
-    # opcjonalnie: padding=(4, 4): Ilość pikseli dodanych na obrzeżach okna detekcji w celu zwiększenia dokładności detekcji.
-    # opcjonalnie: scale=1.03: Skalowanie obrazu podczas kolejnych iteracji detekcji. Wyższa wartość oznacza zmniejszenie obrazu w każdej iteracji.
+    # winStride=(6, 6): Przesunięcie okna detekcji w poziomie i pionie
+    #  podczas przeszukiwania obrazu. Im mniejsza tym więcej wykrywa
+    # opcjonalnie: padding=(4, 4): Ilość pikseli dodanych na obrzeżach
+    #  okna detekcji w celu zwiększenia dokładności detekcji.
     #
-    # boxes - lista prostokątnych obszarów, w których detektor znalazł obiekty (ludzi)
-    # weights - lista wag przypisanych do każdego z obszarów, wskazujących na pewność detekcji
+    # boxes -lista prostokątnych obszarów, w których detektor znalazł obiekty
+    # weights -lista wag przypisanych do każdego z obszarów (pewność detekcji)
 
     # liczba osób
     return len(boxes)
 
+# App Routing mapuje url do funkcji obsugujacej logikę ukrytą pod tym url.
+#  Obsługuje jedynie żądania HTTP typu GET.
 
-@app.route('/url', methods=['GET'])  # App Routing mapuje url do funkcji obsugujacej logikę ukrytą pod tym url. Obsługuje jedynie żądania HTTP typu GET.
+
+@app.route('/url', methods=['GET'])
 def detect_people():  # Funkcja obsługująca żądania na endpointcie
     try:
         # Sprawdź czy podano parametr url
@@ -55,5 +60,9 @@ def detect_people():  # Funkcja obsługująca żądania na endpointcie
         return jsonify({'error': f'Błąd przetwarzania obrazu: {str(e)}'}), 500
 
 
-if __name__ == '__main__':  # Warunek sprawdzający, czy skrypt jest uruchamiany jako główny program (a nie importowany jako moduł)
-    app.run(debug=True, port=8000)  # Uruchamia aplikację Flask, włączając tryb debugowania. Ustawienie portu aplikacji na 8000
+# Warunek sprawdzający, czy skrypt jest uruchamiany
+# jako główny program (a nie importowany jako moduł)
+if __name__ == '__main__':
+    # Uruchamia aplikację Flask, włączając tryb debugowania.
+    # Ustawia portu aplikacji na 8000
+    app.run(debug=True, port=8000)
