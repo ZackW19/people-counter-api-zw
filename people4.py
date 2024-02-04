@@ -40,7 +40,7 @@ def count_people(image):
 
 
 @app.route('/url', methods=['GET'])
-def detect_people():  # Funkcja obsługująca żądania na endpointcie
+def detect_people():  # Funkcja obsługująca żądania na endpoincie
     try:
         # Sprawdź czy podano parametr url
         image_url = request.args.get('url')
